@@ -51,7 +51,7 @@ export class ErrorTracker {
             row: event.lineno,
             col: event.colno,
           },
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+           
           errorStack: parseErrorStackFrames(event.error),
           hehaviorStack: this.trackerInstance.userActionTracker?.hehaviorStack.get(),
           pageInformation: getPageInformation(),
@@ -101,7 +101,7 @@ export class ErrorTracker {
           type: event.reason?.name ?? 'UnKnown',
           errorMessage: event.reason?.message ?? event.reason,
           meta: {},
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+           
           errorStack: parseErrorStackFrames(event.reason),
           hehaviorStack: this.trackerInstance.userActionTracker?.hehaviorStack.get(),
           pageInformation: getPageInformation(),

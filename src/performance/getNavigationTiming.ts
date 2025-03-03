@@ -1,4 +1,4 @@
-import { type PerformanceNavigationTiming } from '@/types/performance';
+import { type PerformanceNavigationTiming } from '@/types/performance'
 
 export function getNavigationTiming(): PerformanceNavigationTiming {
   const {
@@ -13,64 +13,65 @@ export function getNavigationTiming(): PerformanceNavigationTiming {
     domInteractive,
     domContentLoadedEventEnd,
     loadEventStart,
-    fetchStart,
-  } = performance.getEntriesByType('navigation')[0];
+    domComplete,
+    fetchStart
+  } = performance.getEntriesByType('navigation')[0]
 
   return {
     DNS: {
       start: domainLookupStart,
       end: domainLookupEnd,
-      value: domainLookupEnd - domainLookupStart,
+      value: domainLookupEnd - domainLookupStart
     },
     TCP: {
       start: connectStart,
       end: connectEnd,
-      value: connectEnd - connectStart,
+      value: secureConnectionStart ? secureConnectionStart - connectStart : connectEnd - connectStart
     },
     SSL: {
       start: secureConnectionStart ?? 0,
       end: secureConnectionStart ? connectEnd : 0,
-      value: secureConnectionStart ? connectEnd - secureConnectionStart : 0,
+      value: secureConnectionStart ? connectEnd - secureConnectionStart : 0
     },
     TTFB: {
       start: requestStart,
       end: responseStart,
-      value: responseStart - requestStart,
+      value: responseStart - requestStart
     },
     Trans: {
       start: responseStart,
       end: responseEnd,
-      value: responseEnd - responseStart,
+      value: responseEnd - responseStart
     },
     FP: {
       start: fetchStart,
       end: responseEnd,
-      value: responseEnd - fetchStart,
+      value: responseEnd - fetchStart
     },
     DomParse: {
       start: responseEnd,
       end: domInteractive,
-      value: domInteractive - responseEnd,
+      value: domInteractive - responseEnd
     },
     TTI: {
       start: fetchStart,
-      end: domInteractive,
-      value: domInteractive - fetchStart,
+      end: domComplete,
+      value: domComplete - fetchStart
     },
     DomReady: {
       start: fetchStart,
       end: domContentLoadedEventEnd,
-      value: domContentLoadedEventEnd - fetchStart,
+      value: domContentLoadedEventEnd - fetchStart
     },
     Res: {
       start: responseEnd,
       end: loadEventStart,
-      value: loadEventStart - responseEnd,
+      value: loadEventStart - responseEnd
     },
     Load: {
       start: fetchStart,
       end: loadEventStart,
-      value: loadEventStart - fetchStart,
-    },
-  };
+      value: loadEventStart - fetchStart
+    }
+  }
 }
