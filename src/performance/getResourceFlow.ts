@@ -1,8 +1,8 @@
-import { type ResourceFlowTiming } from '@/types/performance';
+import { type ResourceFlowTiming } from '@/types/performance'
 
 export function getResourceFlow(): ResourceFlowTiming[] {
-  const resouceDatas = performance.getEntriesByType('resource');
-  return resouceDatas.map((resourceData) => {
+  const resouceDatas = performance.getEntriesByType('resource')
+  return resouceDatas.map(resourceData => {
     const {
       name,
       transferSize,
@@ -15,8 +15,8 @@ export function getResourceFlow(): ResourceFlowTiming[] {
       connectEnd,
       secureConnectionStart,
       responseStart,
-      requestStart,
-    } = resourceData;
+      requestStart
+    } = resourceData
 
     return {
       name,
@@ -25,10 +25,10 @@ export function getResourceFlow(): ResourceFlowTiming[] {
       start: startTime,
       end: responseEnd,
       DNS: domainLookupEnd - domainLookupStart,
-      TCP: connectEnd - connectStart,
-      SSL: connectEnd - secureConnectionStart,
+      TCP: secureConnectionStart ? secureConnectionStart - connectStart : connectEnd - connectStart,
+      SSL: secureConnectionStart ? connectEnd - secureConnectionStart : 0,
       TTFB: responseStart - requestStart,
-      Trans: responseEnd - requestStart,
-    };
-  });
+      Trans: responseEnd - requestStart
+    }
+  })
 }
