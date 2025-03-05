@@ -20,6 +20,8 @@ export function proxyFetch(loadHandler: (...args: any[]) => any) {
        
       return oFetch.call(window, input, init).then(async (response) => {
         // clone 出一个新的 response,再用其做.text(),避免 body stream already read 问题
+
+        //暂时有疑问
         const res = response.clone();
         httpMetrics = {
           ...httpMetrics,

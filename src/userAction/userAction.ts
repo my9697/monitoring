@@ -70,7 +70,7 @@ export class UserActionTracker {
       if (this.data[UserActionMetricsName.RCR]) this.data[UserActionMetricsName.RCR].push(routerChangeData)
       else this.data[UserActionMetricsName.RCR] = [routerChangeData]
 
-      const hehaviorStackData = {
+      const behaviorStackData = {
         name: UserActionMetricsName.RCR,
         page: getPageInformation().pathname,
         value: {
@@ -79,7 +79,7 @@ export class UserActionTracker {
         time: new Date().getTime(),
         timeFormat: formatDate(new Date())
       }
-      this.hehaviorStack.push(hehaviorStackData)
+      this.hehaviorStack.push(behaviorStackData)
     })
   }
 
@@ -163,6 +163,7 @@ export class UserActionTracker {
   }
 
   private sendDataCustom(data: Record<string, any>) {
+    //TODO优化：用户自定义的我们初始化一个队列，等到这个队列满了就上报。
     this.report(data, 'custom')
     this.hehaviorStack.push({
       name: 'custom',
@@ -189,3 +190,4 @@ export class UserActionTracker {
     })
   }
 }
+
