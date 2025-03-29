@@ -17,6 +17,8 @@ export class UserActionTracker {
   private readonly classTrackedList: string[]
   private readonly eventTrackedList: string[]
   public readonly hehaviorStack: BehaviorStack
+  private readonly customActions: any[]
+  private readonly customActionsAcount: number
   private readonly report: Report
 
   constructor(options: true | UserActionOptions, report: Report) {
@@ -43,6 +45,8 @@ export class UserActionTracker {
     this.hehaviorStack = new BehaviorStack({
       maxBehaviorRecords: this.options.maxBehaviorRecords!
     })
+    this.customActionsAcount = this.options.customAcount || 5
+    this.customActions = []
     this.report = report
     writePushStateAndReplaceState()
     ;(window as any).sendData = this.sendDataCustom.bind(this)
@@ -172,8 +176,14 @@ export class UserActionTracker {
   }
 
   private sendDataCustom(data: Record<string, any>) {
-    //TODO优化：用户自定义的我们初始化一个队列，等到这个队列满了就上报。
-    this.report(data, 'custom')
+    if (this.customActions.length === this.customActionsAcount) {
+      const res = this.report(this.customActions, 'custom')
+      if(res)this.customActions.length = 0
+      this.customActions.length = 0
+    } else {
+      this.customActions.push(data)
+    }
+
     this.hehaviorStack.push({
       name: 'custom',
       page: getPageInformation().pathname,

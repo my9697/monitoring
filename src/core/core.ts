@@ -55,7 +55,7 @@ export class Tracker {
       }
     )
     const blob = new Blob([JSON.stringify(params)])
-    navigator.sendBeacon(this.options.requestUrl as string, blob)
+    return navigator.sendBeacon(this.options.requestUrl as string, blob)
   }
 
   private setUserId(uid: string) {

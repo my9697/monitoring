@@ -18,6 +18,7 @@ export interface UserActionOptions {
   classTrackedList?: string[];
   eventTrackedList?: string[];
   maxBehaviorRecords?: number;
+  customAcount?: number;
 }
 
 /**
