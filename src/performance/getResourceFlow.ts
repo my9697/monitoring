@@ -15,7 +15,9 @@ export function getResourceFlow(): ResourceFlowTiming[] {
       connectEnd,
       secureConnectionStart,
       responseStart,
-      requestStart
+      requestStart,
+      redirectStart,
+      redirectEnd,
     } = resourceData
 
     return {
@@ -28,7 +30,8 @@ export function getResourceFlow(): ResourceFlowTiming[] {
       TCP: secureConnectionStart ? secureConnectionStart - connectStart : connectEnd - connectStart,
       SSL: secureConnectionStart ? connectEnd - secureConnectionStart : 0,
       TTFB: responseStart - requestStart,
-      Trans: responseEnd - requestStart
+      Trans: responseEnd - requestStart,
+      Redirect: redirectEnd - redirectStart,
     }
   })
 }

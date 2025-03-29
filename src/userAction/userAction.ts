@@ -8,6 +8,7 @@ import { afterLoad } from '@/utils'
 import { getOriginInformation } from './getOriginInformation'
 import { proxyXmlHttp } from './proxyXmlHttp'
 import { proxyFetch } from './proxyFetch'
+import { getParent } from '@/utils/getParent'
 
 export class UserActionTracker {
   private readonly data: Record<UserActionMetricsName | string, Record<string, any>>
@@ -102,7 +103,15 @@ export class UserActionTracker {
         event => {
           let target = this.elementTrackedList.includes((event.target as HTMLElement)?.tagName?.toLocaleLowerCase()) ? (event.target as HTMLElement) : undefined
           target =
-            (target ?? Array.from((event.target as HTMLElement)?.classList).find(className => this.classTrackedList.includes(className)))
+            (target ??
+            Array.from((event.target as HTMLElement)?.classList).find(className => {
+              const el = getParent(event, className)
+              if (el) {
+                return this.classTrackedList.includes((el as HTMLElement).className)
+              } else {
+                return false
+              }
+            }))
               ? (event.target as HTMLElement)
               : undefined
 

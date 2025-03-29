@@ -66,6 +66,7 @@ export interface ResourceFlowTiming {
   SSL: number
   TTFB: number
   Trans: number
+  Redirect: number
 }
 
 export type PerformanceEntryHandler = (entry: any) => any
