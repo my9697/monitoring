@@ -13,7 +13,10 @@ export function getNavigationTiming(): PerformanceNavigationTiming {
     domInteractive,
     loadEventStart,
     domComplete,
-    fetchStart
+    fetchStart,
+    redirectCount,
+    redirectStart,
+    redirectEnd
   } = performance.getEntriesByType('navigation')[0]
 
   return {
@@ -61,6 +64,12 @@ export function getNavigationTiming(): PerformanceNavigationTiming {
       start: fetchStart,
       end: loadEventStart,
       value: loadEventStart - fetchStart
-    }
+    },
+    Redirect: {
+      start: redirectStart,
+      end: redirectEnd,
+      value: redirectEnd - redirectStart
+    },
+    RedirectCount: redirectCount
   }
 }

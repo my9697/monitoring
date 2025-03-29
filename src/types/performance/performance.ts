@@ -37,6 +37,8 @@ export interface PerformanceOptions {
  * @param DomReady HTML加载完成时间也就是 DOM Ready 时间    单页面客户端渲染下，为生成模板dom树所花费时间；非单页面或单页面服务端渲染下，为生成实际dom树所花费时间'
  * @param Res 资源加载耗时
  * @param Load 页面完全加载时间                            Load=首次渲染时间+DOM解析耗时+同步JS执行+资源加载耗时。
+ * @param Rediect 重定向耗时
+ * @param RedirectCount 重定向次数
  */
 
 export interface PerformanceNavigationTiming {
@@ -49,6 +51,8 @@ export interface PerformanceNavigationTiming {
   DomReady: { start: number; end: number; value: number }
   Res: { start: number; end: number; value: number }
   Load: { start: number; end: number; value: number }
+  Redirect: { start: number; end: number; value: number }
+  RedirectCount: number
 }
 
 export interface ResourceFlowTiming {
