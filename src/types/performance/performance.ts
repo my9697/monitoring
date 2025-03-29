@@ -10,21 +10,21 @@
 export enum PerformanceMetricsName {
   FCP = 'FCP',
   LCP = 'LCP',
-  FID = 'FID',
+  INP = 'INP',
   CLS = 'CLS',
   NT = 'navigationTiming',
   RF = 'resource-flow',
-  CD = 'cache-data',
+  CD = 'cache-data'
 }
 
 export interface PerformanceOptions {
-  FCP?: boolean;
-  LCP?: boolean;
-  FID?: boolean;
-  CLS?: boolean;
-  navigationTiming?: boolean;
-  resourceFlow?: boolean;
-  cacheData?: boolean;
+  FCP?: boolean
+  LCP?: boolean
+  FID?: boolean
+  CLS?: boolean
+  navigationTiming?: boolean
+  resourceFlow?: boolean
+  cacheData?: boolean
 }
 
 /**
@@ -42,30 +42,30 @@ export interface PerformanceOptions {
  */
 
 export interface PerformanceNavigationTiming {
-  DNS: { start: number; end: number; value: number };
-  SSL: { start: number; end: number; value: number };
-  TCP: { start: number; end: number; value: number };
-  TTFB: { start: number; end: number; value: number };
-  Trans: { start: number; end: number; value: number };
-  FP: { start: number; end: number; value: number };
-  DomParse: { start: number; end: number; value: number };
-  TTI: { start: number; end: number; value: number };
-  DomReady: { start: number; end: number; value: number };
-  Res: { start: number; end: number; value: number };
-  Load: { start: number; end: number; value: number };
+  DNS: { start: number; end: number; value: number }
+  SSL: { start: number; end: number; value: number }
+  TCP: { start: number; end: number; value: number }
+  TTFB: { start: number; end: number; value: number }
+  Trans: { start: number; end: number; value: number }
+  FP: { start: number; end: number; value: number }
+  DomParse: { start: number; end: number; value: number }
+  TTI: { start: number; end: number; value: number }
+  DomReady: { start: number; end: number; value: number }
+  Res: { start: number; end: number; value: number }
+  Load: { start: number; end: number; value: number }
 }
 
 export interface ResourceFlowTiming {
-  name: string;
-  initiatorType: string;
-  transferSize: number;
-  start: number;
-  end: number;
-  DNS: number;
-  TCP: number;
-  SSL: number;
-  TTFB: number;
-  Trans: number;
+  name: string
+  initiatorType: string
+  transferSize: number
+  start: number
+  end: number
+  DNS: number
+  TCP: number
+  SSL: number
+  TTFB: number
+  Trans: number
 }
 
-export type PerformanceEntryHandler = (entry: any) => any;
+export type PerformanceEntryHandler = (entry: any) => any

@@ -185,9 +185,10 @@ export class UserActionTracker {
 
   private userActionDataReportHandler() {
     window.addEventListener('beforeunload', () => {
-      this.report(this.data, 'userAction')
+      if (JSON.stringify(this.data) !== '{}') {
+        this.report(this.data, 'userAction')
+      }
       if (this.options.BS) this.report(this.hehaviorStack.get(), 'behaviorStack')
     })
   }
 }
-

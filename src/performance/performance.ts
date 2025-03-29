@@ -1,6 +1,6 @@
 import { type Report } from '@/types'
 import { PerformanceMetricsName, type ResourceFlowTiming, type PerformanceOptions } from '@/types/performance'
-import { onFCP, onCLS, onLCP, onFID, type FCPMetric, type LCPMetric, type FIDMetric, type CLSMetric } from 'web-vitals'
+import { onFCP, onCLS, onLCP, onINP, type INPMetric, type FCPMetric, type LCPMetric, type CLSMetric } from 'web-vitals'
 import { getNavigationTiming } from './getNavigationTiming'
 import { afterLoad } from '@/utils/afterLoad'
 import { getResourceFlow } from './getResourceFlow'
@@ -17,8 +17,8 @@ export class PerformanceTracker {
       {
         FCP: true,
         LCP: true,
-        FID: true,
         CLS: true,
+        INP: true,
         navigationTiming: true,
         resourceFlow: true,
         cacheData: true
@@ -50,9 +50,9 @@ export class PerformanceTracker {
     })
   }
 
-  private initFID() {
-    onFID((metricData: FIDMetric) => {
-      this.data[PerformanceMetricsName.FID] = {
+  private initINP() {
+    onINP((metricData: INPMetric) => {
+      this.data[PerformanceMetricsName.INP] = {
         name: metricData.name,
         value: metricData.value,
         rating: metricData.rating
@@ -88,7 +88,7 @@ export class PerformanceTracker {
   private installPerformanceInnerTracker() {
     if (this.options.FCP) this.initFCP()
     if (this.options.LCP) this.initLCP()
-    if (this.options.FID) this.initFID()
+    if (this.options.FID) this.initINP()
     if (this.options.CLS) this.initCLS()
 
     afterLoad(() => {
