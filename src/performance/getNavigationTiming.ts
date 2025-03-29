@@ -11,7 +11,6 @@ export function getNavigationTiming(): PerformanceNavigationTiming {
     responseStart,
     responseEnd,
     domInteractive,
-    domContentLoadedEventEnd,
     loadEventStart,
     domComplete,
     fetchStart
@@ -43,25 +42,15 @@ export function getNavigationTiming(): PerformanceNavigationTiming {
       end: responseEnd,
       value: responseEnd - responseStart
     },
-    FP: {
-      start: fetchStart,
-      end: responseEnd,
-      value: responseEnd - fetchStart
-    },
     DomParse: {
       start: responseEnd,
       end: domInteractive,
       value: domInteractive - responseEnd
     },
-    TTI: {
+    DomReady: {
       start: fetchStart,
       end: domComplete,
       value: domComplete - fetchStart
-    },
-    DomReady: {
-      start: fetchStart,
-      end: domContentLoadedEventEnd,
-      value: domContentLoadedEventEnd - fetchStart
     },
     Res: {
       start: responseEnd,
