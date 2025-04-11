@@ -1,6 +1,6 @@
 {
   "name": "wemy-monitoring",
-  "version": "1.2.2",
+  "version": "2.0.0",
   "description": "一个前端监控",
   "files": [
     "dist"
@@ -46,6 +46,6 @@
     "ua-parser-js": "^1.0.40",
     "uuid": "^9.0.1",
     "vite": "^6.2.0",
-    "web-vitals": "^3.5.2"
+    "web-vitals": "^4.2.4"
   }
 }
